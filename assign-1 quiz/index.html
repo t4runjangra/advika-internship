@@ -13,7 +13,7 @@
         <nav class="navBar" id="navbar">
             <h2>Quiz</h2>
             <div class="score-section">
-                <div class="score-card hidden" id="score-card"  >
+                <div class="score-card hidden" id="score-card">
                     <div class="score">
                         <p>Score: <span id="user-score">-/-</span></p>
                     </div>
@@ -24,13 +24,28 @@
                 </div>
 
                 <div id="profile-scoreboard" class="profile-scoreboard">
-                    <img id="profile-pic" src="https://www.dpzone.in/wp-content/uploads/2/Guest-PFP-3.jpg" alt="Profile Picture"
-                        class="profile-pic" />
+                    <img id="profile-pic" src="https://www.dpzone.in/wp-content/uploads/2/Guest-PFP-3.jpg"
+                        alt="Profile Picture" class="profile-pic" />
 
-                    <div id="username" class="score-info">
+                    <div id="username" class="username">
                         Guest
                     </div>
                 </div>
+                <div>
+                    <button id="ham-icon">&#9776;</button>
+                    <div id="hamburger-menu" class="hamburger-menu hidden">
+                        <div class="hamburger-header">
+                            <span>Previous Scores</span>
+                            <button id="close-hamburger" class="close-btn">&times;</button>
+                        </div>
+                        <div id="score-history" class="score-history">
+                            <p>No previous scores available.</p>
+                        </div>
+                        <button id="clear-scores" class="clear-btn">Clear Scores</button>
+                        <button id="logout" class="logout-btn">Log out</button>
+                    </div>
+                </div>
+
             </div>
         </nav>
     </div>

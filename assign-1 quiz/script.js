@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+
     const quizContainer = document.getElementById('quiz-container');
     const questionContainer = document.getElementById('question-container');
     const resultContainer = document.getElementById('result-container');
@@ -20,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const usernameInput = document.getElementById('username-input');
     const submitbtn = document.getElementById('submit')
 
+    const hamIcon = document.getElementById('ham-icon');
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const closeBtn = document.getElementById('close-hamburger');
+    const scoreHistory = document.getElementById('score-history');
+    const clearBtn = document.getElementById('clear-scores');
+    const logout = document.getElementById('logout')
 
 
 
@@ -141,7 +149,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentQuestionIndex = 0
     let score = 0
-    let userScore = 0
+    let userScore = JSON.parse(localStorage.getItem("userScore")) || []
+    addingScore()
+
+    
+    const localUserName = user.textContent = localStorage.getItem("username");
+    if (localUserName) {
+        usernameForm.classList.add('hidden')
+        startButton.classList.remove('hidden')
+        hamIcon.classList.remove('hidden')
+        startQuiz()
+    }
+    else {
+        user.textContent = "Guest"
+        hamIcon.classList.add('hidden')
+    }
+    
+    hamIcon.addEventListener('click', () => {
+        hamburgerMenu.classList.toggle('hidden')
+        
+    })
+    
+    closeBtn.addEventListener('click', () => {
+        hamburgerMenu.classList.add('hidden')
+    })
 
     nextButton.addEventListener('click', () => {
         currentQuestionIndex++
@@ -150,32 +181,48 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             showResult();
         }
-
+        
+    })
+    clearBtn.addEventListener('click', () => {
+        localStorage.removeItem("userScore")
+        scoreHistory.innerHTML = '<p>No previous scores available.</p>';
+        
+        
+    })
+    
+    logout.addEventListener('click', () => {
+        confirm("Are you sure!")
+        localStorage.clear()
+        location.reload()
     })
 
     usernameForm.addEventListener("submit", (event) => {
-        const username = usernameInput.value.trim().toLowerCase()
         event.preventDefault()
-
-        // if (username === '') { 
-        //     alert('Please enter your username to start the quiz')
-        //     return
-        // } else 
+        const username = usernameInput.value.trim().toLowerCase()
+        if (!localStorage.getItem("username")) {
+            localStorage.setItem("username", username);
+            user.textContent = username
+            console.log("Username stored in localStorage.");
+        } else {
+            console.log("Username already exists in localStorage.");
+        }
         if (username.length < 3) {
             alert('Username must be at least 3 characters long.')
             return
         }
-        user.textContent = username
+        console.log(localStorage.getItem("username"));
+        
+        user.textContent = localStorage.getItem("username")
         usernameForm.classList.add('hidden')
         questionContainer.classList.remove('hidden')
+        hamIcon.classList.remove('hidden')
         startButton.classList.remove('hidden')
-
+        
     })
     startButton.classList.add('hidden')
-
     startButton.addEventListener("click", startQuiz)
 
-
+    
 
 
     function startQuiz() {
@@ -183,7 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
         startButton.classList.add('hidden')
         resultContainer.classList.add('hidden')
         questionContainer.classList.remove('hidden')
-
         showQuestion()
     }
 
@@ -191,9 +237,9 @@ document.addEventListener("DOMContentLoaded", () => {
         nextButton.classList.add('hidden')
         questionText.textContent = questions[currentQuestionIndex].question;
         choicesList.innerHTML = "" // clear previous question 
-        
+
         questions[currentQuestionIndex].choices.forEach((choice, index) => {
-            currentQuestion.innerHTML = `${currentQuestionIndex+1} / ${questions.length}`
+            currentQuestion.innerHTML = `${currentQuestionIndex + 1} / ${questions.length}`
             const li = document.createElement('li')
             li.textContent = choice
             li.addEventListener('click', () => selectAnswer(index))
@@ -203,14 +249,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function selectAnswer(index) {
         const correctAnswer = questions[currentQuestionIndex].correctAnswerIndex
-        console.log(correctAnswer, index)
         if (index == correctAnswer) {
             score++
         }
+
         userScoreCard.innerHTML = `${score}/${questions.length}`
         nextButton.classList.remove("hidden")
     }
     function showResult() {
+        const history = {
+            "Score": score,
+            "Total": questions.length
+        }
+        console.log(history);
+        userScore.push(history)
+        saveUser()
+        addingScore()
+        
         questionContainer.classList.add('hidden')
         resultContainer.classList.remove('hidden')
         scoreDisplay.textContent = `${score} out of ${questions.length}`
@@ -218,8 +273,21 @@ document.addEventListener("DOMContentLoaded", () => {
     restartButton.addEventListener("click", () => {
         currentQuestionIndex = 0
         score = 0
-        
         resultContainer.classList.add('hidden')
         startButton.classList.remove('hidden')
+        userScoreCard.innerHTML = `-/-`
+        currentQuestion.innerHTML = `-/-`
     })
+    
+    function addingScore() {
+        if (userScore.length === 0) {
+            scoreHistory.innerHTML = '<p>No previous scores available.</p>';
+        } else {
+            scoreHistory.innerHTML = userScore.map((s, i) =>
+                `<p>Quiz ${i + 1}: ${s.Score} / ${s.Total}</p>`).join('');
+        }
+    }
+    function saveUser() {
+        localStorage.setItem("userScore", JSON.stringify(userScore))
+    }
 })
