@@ -49,4 +49,4 @@ The app uses **persistent local storage**, **animated feedback**, and a **dynami
 
 1. Clone this repository:
    ```bash
-   <!-- git clone https://github.com/t4runjangra/ -->
+   <!-- git clone https://github.com/t4runjangra/advika-internship-->
