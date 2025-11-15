@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz -assignment</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rubik:wght@400;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Playfair+Display&family=Poppins&family=Roboto&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rubik:wght@400;700&family=Work+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -15,16 +21,6 @@
         <nav class="navBar" id="navbar">
             <h2>Quiz</h2>
             <div class="score-section">
-                <div class="score-card hidden" id="score-card">
-                    <div class="score hidden">
-                        <p>Score: <span id="user-score">-/-</span></p>
-                    </div>
-                    <div class="currentQuestion hidden">
-                        <p>Current Question: <span id="currentQuestion">-/-</span></p>
-
-                    </div>
-                </div>
-
                 <div id="profile-scoreboard" class="profile-scoreboard">
                     <img id="profile-pic" src="https://www.dpzone.in/wp-content/uploads/2/Guest-PFP-3.jpg"
                         alt="Profile Picture" class="profile-pic" />
@@ -53,7 +49,8 @@
     </div>
     <div class="container">
         <h1>Quiz App</h1>
-        
+        <p id="welcome-message" class="welcome-message"></p>
+
         <div id="form">
             <form id="username-form" class="username-form">
                 <label for="username-input" class="username-label">Enter your username</label>

@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 
-    const quizContainer = document.getElementById('quiz-container');
     const questionContainer = document.getElementById('question-container');
     const resultContainer = document.getElementById('result-container');
     const questionText = document.getElementById('question-text');
@@ -9,13 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const startButton = document.getElementById('start-btn');
     const restartButton = document.getElementById('restart-btn');
     const scoreDisplay = document.getElementById('score');
-    const navbarContainer = document.getElementById('navbarContainer');
-    const navbar = document.getElementById('navbar');
-    const scoreCard = document.getElementById('score-card');
     const userScoreCard = document.getElementById('user-score');
-    const currentQuestion = document.getElementById('currentQuestion');
-    const profileScoreboard = document.getElementById('profile-scoreboard');
-    const profilePic = document.getElementById('profile-pic');
     const user = document.getElementById('username');
     const usernameForm = document.getElementById('username-form');
     const usernameInput = document.getElementById('username-input');
@@ -25,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scoreHistory = document.getElementById('score-history');
     const clearBtn = document.getElementById('clear-scores');
     const logout = document.getElementById('logout')
+    const welcomeMessage = document.getElementById("welcome-message");
 
 
 
@@ -52,73 +46,73 @@ document.addEventListener("DOMContentLoaded", () => {
             score: 1
         },
 
-        // {
-        //     question: "Which CSS property is used to change the background color of an element?",
-        //     choices: [
-        //         "color",
-        //         "bgcolor",
-        //         "background-color",
-        //         "background"
-        //     ],
-        //     correctAnswerIndex: 2, // background-color
-        //     score: 1
-        // },
-        // {
-        //     question: "What does the 'C' in CSS stand for?",
-        //     choices: [
-        //         "Creative",
-        //         "Computer",
-        //         "Cascading",
-        //         "Colorful"
-        //     ],
-        //     correctAnswerIndex: 2, // Cascading
-        //     score: 1
-        // },
-        // {
-        //     question: "In CSS, what is the default value of the 'position' property?",
-        //     choices: [
-        //         "relative",
-        //         "fixed",
-        //         "static",
-        //         "absolute"
-        //     ],
-        //     correctAnswerIndex: 2, // static
-        //     score: 1
-        // },
+        {
+            question: "Which CSS property is used to change the background color of an element?",
+            choices: [
+                "color",
+                "bgcolor",
+                "background-color",
+                "background"
+            ],
+            correctAnswerIndex: 2, // background-color
+            score: 1
+        },
+        {
+            question: "What does the 'C' in CSS stand for?",
+            choices: [
+                "Creative",
+                "Computer",
+                "Cascading",
+                "Colorful"
+            ],
+            correctAnswerIndex: 2, // Cascading
+            score: 1
+        },
+        {
+            question: "In CSS, what is the default value of the 'position' property?",
+            choices: [
+                "relative",
+                "fixed",
+                "static",
+                "absolute"
+            ],
+            correctAnswerIndex: 2, // static
+            score: 1
+        },
 
-        // {
-        //     question: "Which keyword is used to declare a constant variable in JavaScript?",
-        //     choices: [
-        //         "var",
-        //         "let",
-        //         "const",
-        //         "constant"
-        //     ],
-        //     correctAnswerIndex: 2, // const
-        //     score: 1
-        // },
-        // {
-        //     question: "What is the correct way to write an IF statement in JavaScript?",
-        //     choices: [
-        //         "if i == 5 then",
-        //         "if (i == 5)",
-        //         "if i = 5",
-        //         "if i = 5 then"
-        //     ],
-        //     correctAnswerIndex: 1, // if (i == 5)
-        //     score: 1
-        // },
-        // {
-        //     question: "Which operator is used to check for both value and type equality in JavaScript?",
-        //     choices: [
-        //         "==",
-        //         "!=",
-        //         "===",
-        //         "="
-        //     ],
-        //     correctAnswerIndex: 2, // ===
-        //     score: 1
-        // },
+        {
+            question: "Which keyword is used to declare a constant variable in JavaScript?",
+            choices: [
+                "var",
+                "let",
+                "const",
+                "constant"
+            ],
+            correctAnswerIndex: 2, // const
+            score: 1
+        },
+        {
+            question: "What is the correct way to write an IF statement in JavaScript?",
+            choices: [
+                "if i == 5 then",
+                "if (i == 5)",
+                "if i = 5",
+                "if i = 5 then"
+            ],
+            correctAnswerIndex: 1, // if (i == 5)
+            score: 1
+        },
+        {
+            question: "Which operator is used to check for both value and type equality in JavaScript?",
+            choices: [
+                "==",
+                "!=",
+                "===",
+                "="
+            ],
+            correctAnswerIndex: 2, // ===
+            score: 1
+        },
         {
             question: "Which method is used to remove the last element from a JavaScript array and return that element?",
             choices: [
@@ -146,6 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentQuestionIndex = 0
     let score = 0
+    const PASSING_THRESHOLD_PERCENTAGE = 60;
+    const TOTAL_QUESTIONS = questions.length;
     let userScore = JSON.parse(localStorage.getItem("userScore")) || []
     addingScore()
 
@@ -184,14 +180,19 @@ document.addEventListener("DOMContentLoaded", () => {
     usernameForm.addEventListener("submit", (event) => {
         event.preventDefault()
         const username = usernameInput.value.trim().toLowerCase()
+        if (username.length < 3) {
+            alert('Username must be at least 3 characters long.')
+            return;
+        }
         if (!localStorage.getItem("username")) {
             localStorage.setItem("username", username);
             user.textContent = username
         }
-        if (username.length < 3) {
-            alert('Username must be at least 3 characters long.')
-            return
+        if (username) {
+            welcomeMessage.innerHTML = `Hey!!! ${username},<br> <span style="font-size:20px; color:black">ready to test your skills? Let's get started! 🚀</span>`;
         }
+
+
         user.textContent = localStorage.getItem("username")
         usernameForm.classList.add('hidden')
         questionContainer.classList.remove('hidden')
@@ -205,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function startQuiz() {
-        scoreCard.classList.remove('hidden')
+        welcomeMessage.classList.add('hidden')
         startButton.classList.add('hidden')
         resultContainer.classList.add('hidden')
         questionContainer.classList.remove('hidden')
@@ -223,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
         choicesList.innerHTML = "" // clear previous question 
 
         questions[currentQuestionIndex].choices.forEach((choice, index) => {
-            currentQuestion.innerHTML = `${currentQuestionIndex + 1} / ${questions.length}`
             const li = document.createElement('li')
             li.textContent = choice
             li.addEventListener('click', () => selectAnswer(index, li))
@@ -266,9 +266,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     function showResult() {
+        const percentageScore = (score / TOTAL_QUESTIONS) * 100;
+
+        let resultMessage = '';
+        let resultClass = '';
+        if (percentageScore >= PASSING_THRESHOLD_PERCENTAGE) {
+            resultMessage = `Congratulations! You PASSED! 🎉`;
+            resultClass = 'passed';
+        } else {
+            resultMessage = `Sorry, you FAILED. Try again! `;
+            resultClass = 'failed';
+        }
         const history = {
             "Score": score,
-            "Total": questions.length
+            "Total": questions.length,
+            "Status": percentageScore >= PASSING_THRESHOLD_PERCENTAGE ? "Passed" : "Failed"
         }
         console.log(history);
         userScore.push(history)
@@ -277,15 +289,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         questionContainer.classList.add('hidden')
         resultContainer.classList.remove('hidden')
-        scoreDisplay.textContent = `${score} out of ${questions.length}`
+        scoreDisplay.innerHTML = `
+                              <br>
+                              <p style="font-size:2em;">  ${score} / ${TOTAL_QUESTIONS}</p> <br>
+                              <p class="${resultClass}" style=" height: 100px font-size:3em; "> ${resultMessage}</p>
+                              `;
     }
     restartButton.addEventListener("click", () => {
         currentQuestionIndex = 0
         score = 0
         resultContainer.classList.add('hidden')
         startButton.classList.remove('hidden')
-        userScoreCard.innerHTML = `-/-`
-        currentQuestion.innerHTML = `-/-`
     })
 
     function addingScore() {
@@ -293,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scoreHistory.innerHTML = '<p>No previous scores available.</p>';
         } else {
             scoreHistory.innerHTML = userScore.map((s, i) =>
-                `<p>Quiz ${i + 1}: ${s.Score} / ${s.Total}</p>`).join('');
+                `<p>Quiz ${i + 1}: ${s.Score} / ${s.Total} - ${s.Status} </p>`).join('');
         }
     }
     function shuffleArray(array) {
