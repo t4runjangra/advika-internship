@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-2 - Movie Search</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo" data-action="navigate-home">Assignment -2 </div>
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#" data-action="navigate-home">Home</a></li>
+                <li class="nav-item"><a href="#" data-action="navigate-browse" data-query="Browse">Browse</a></li>
+                <li class="nav-item"><a href="#" data-action="navigate-recommendations" data-section="hindi">Recommendations</a></li>
+                <li class="nav-item"><a href="#" data-action="navigate-about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="home-view" class="view">
+            <div class="hero-section">
+                <h1>Find Your Next Cinematic Adventure.</h1>
+                <p>Explore millions of movie titles, personalized recommendations, and top-rated films.</p>
+                <div class="search-bar hero-search-bar">
+                    <input type="text" id="home-search-input" placeholder="Search for a movie, director, or genre...">
+                    <button class="btn-search" data-context="home">Search</button>
+                </div>
+            </div>
+            <div style="margin-top: 40px;">
+                <h2 class="section-title">Trending Now 🔥</h2>
+                <div id="trending-movies-container" class="movie-grid"></div>
+            </div>
+            <div id="hindi-recommendations" style="margin-top: 40px;">
+                <h2 class="section-title">Top Hindi Movies 🇮🇳</h2>
+                <div id="hindi-movies-container" class="movie-grid"></div>
+            </div>
+        </section>
+
+        <section id="search-results-view" class="view hidden">
+            <h2 class="section-title">Results for: "<span id="search-query-display"></span>"</h2>
+            <div class="search-bar-container">
+                <div class="search-bar hidden">
+                    <input type="text" id="results-search-input" placeholder="Refine your search...">
+                    <button class="btn-search" id="search-btn" data-context="results">Search</button>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: flex-start; gap: 15px; margin-bottom: 20px;">
+                <select style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
+                    <option>Sort By: Rating</option>
+                    <option>Sort By: Release Year</option>
+                    <option>Sort By: Title</option>
+                </select>
+                <button style="background-color: var(--color-secondary); color: var(--color-text-light); border: 1px solid var(--color-text-fade); padding: 10px 15px; border-radius: 5px;">Filter: All Genres</button>
+            </div>
+            <div id="search-results-container" class="movie-grid"></div>
+            <div class="pagination">
+                <button>&laquo; Prev</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>Next &raquo;</button>
+            </div>
+        </section>
+
+        <section id="movie-detail-view" class="view"></section>
+    </main>
+</body>
+<script src="scrpit.js"></script>
+</html>
