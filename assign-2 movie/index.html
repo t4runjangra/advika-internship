@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment-2 - Movie Search</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    <title>Search The Scene - Movie Search</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header class="header">
-        <div class="logo" data-action="navigate-home">Assignment -2 </div>
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-item"><a href="#" data-action="navigate-home">Home</a></li>
-                <li class="nav-item"><a href="#" data-action="navigate-browse" data-query="Browse">Browse</a></li>
-                <li class="nav-item"><a href="#" data-action="navigate-recommendations" data-section="hindi">Recommendations</a></li>
-                <li class="nav-item"><a href="#" data-action="navigate-about">About</a></li>
-            </ul>
-        </nav>
-    </header>
 
+<body>
+    <header class="header" id="header">
+        <div class="logo" data-action="navigate-home">The Control Room </div>
+        <nav>
+            <ul class="nav-list ">
+                <li class="nav-item"><a href="#header" data-action="navigate-home" target="_self">Home</a></li>
+                <li class="nav-item"><a href="#home-search-input" data-action="navigate-browse" data-query="Browse">Browse</a>
+                </li>
+                <li class="nav-item"><a href="#hindi-recommendations" data-action="navigate-recommendations"
+                    data-section="hindi">Recommendations</a></li>
+                    <li class="nav-item"><a href="#footer" data-action="navigate-about">About</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="hamburger" id="hamburger">
+                <ul>
+                    <li class="bar"><a href="#header"> <span>Home</span></a></li>
+                    <li class="bar"><a href="#home-viewr">Browse</a></li>
+                    <li class="bar"><a href="#Trending">Trending</a></li>
+                    <li class="bar"><a href="#hindi-recommendations">Hindi</a></li>
+                    <li class="bar"> <a href="#footer"> About</a></li>
+                </ul>
+            </div> -->
+        </header>
+        
     <main class="container">
         <section id="home-view" class="view">
-            <div class="hero-section">
+            <div class="hero-section" id="home-search-container">
                 <h1>Find Your Next Cinematic Adventure.</h1>
                 <p>Explore millions of movie titles, personalized recommendations, and top-rated films.</p>
-                <div class="search-bar hero-search-bar">
+                <div class="search-bar hero-search-bar" id="search-bar">
                     <input type="text" id="home-search-input" placeholder="Search for a movie, director, or genre...">
-                    <button class="btn-search" data-context="home">Search</button>
+                    <button class="btn-search" id="search" data-context="home">Search</button>
                 </div>
             </div>
-            <div style="margin-top: 40px;">
-                <h2 class="section-title">Trending Now 🔥</h2>
+            <div id="Trending">
+                <h2 class="section-title" style="text-align: left; width: 75%;">Trending Now 🔥</h2>
                 <div id="trending-movies-container" class="movie-grid"></div>
             </div>
-            <div id="hindi-recommendations" style="margin-top: 40px;">
-                <h2 class="section-title">Top Hindi Movies 🇮🇳</h2>
+            <div id="hindi-recommendations" style="margin-top: 40px; " class="hindi-recommendations">
+                <h2 class="section-title" style=" text-align: left; width: 75%;">Top Hindi Movies 🇮🇳</h2>
                 <div id="hindi-movies-container" class="movie-grid"></div>
             </div>
         </section>
@@ -48,26 +62,48 @@
                     <button class="btn-search" id="search-btn" data-context="results">Search</button>
                 </div>
             </div>
-            <div style="display: flex; justify-content: flex-start; gap: 15px; margin-bottom: 20px;">
-                <select style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
-                    <option>Sort By: Rating</option>
-                    <option>Sort By: Release Year</option>
-                    <option>Sort By: Title</option>
-                </select>
-                <button style="background-color: var(--color-secondary); color: var(--color-text-light); border: 1px solid var(--color-text-fade); padding: 10px 15px; border-radius: 5px;">Filter: All Genres</button>
-            </div>
-            <div id="search-results-container" class="movie-grid"></div>
-            <div class="pagination">
-                <button>&laquo; Prev</button>
-                <button class="active">1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>Next &raquo;</button>
+            <div class="result-container">
+                <div style=" width: 75%; gap: 15px; margin-bottom: 20px;">
+                    <select
+                        style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
+                        <option>Sort By: Rating</option>
+                        <option>Sort By: Release Year</option>
+                        <option>Sort By: Title</option>
+                    </select>
+                    <button
+                        style="background-color: var(--color-secondary); color: var(--color-text-light); border: 1px solid var(--color-text-fade); padding: 10px 15px; border-radius: 5px;">Filter:
+                        All Genres</button>
+                </div>
+                <div id="search-results-container" class="movie-grid"></div>
+                <div class="pagination">
+                    <button>&laquo; Prev</button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>Next &raquo;</button>
+                </div>
             </div>
         </section>
 
         <section id="movie-detail-view" class="view"></section>
     </main>
+    <div id="error-toast" class="toast "></div>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 The Control Room / (Assignment-2). All rights reserved.</p>
+            <nav class="footer-nav" id="footer">
+                <a href="#header" aria-label="Home">Home</a>
+                <a href="#home-view" aria-label="Browse">Browse</a>
+                <a href="#Trending" aria-label="Recommendations">Trending</a>
+                <a href="#hindi-recommendations" aria-label="Recommendations">Recommendations</a>
+                <a href="#footer" aria-label="About">About</a>
+            </nav>
+            <p class="footer-credits">Made by Tarun</p>
+        </div>
+    </footer>
+
 </body>
-<script src="scrpit.js"></script>
+<script type="module" src="scrpit.js"></script>
+<script type="module" src="search-movie.js"></script>
+
 </html>
