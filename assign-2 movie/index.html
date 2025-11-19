@@ -15,15 +15,16 @@
         <div class="logo" data-action="navigate-home">The Control Room </div>
         <nav>
             <ul class="nav-list ">
-                <li class="nav-item"><a href="#header" data-action="navigate-home" target="_self">Home</a></li>
-                <li class="nav-item"><a href="#home-search-input" data-action="navigate-browse" data-query="Browse">Browse</a>
+                <li class="nav-item"><a href="" data-action="navigate-home" target="_self">Home</a></li>
+                <li class="nav-item"><a href="#home-search-input" data-action="navigate-browse"
+                        data-query="Browse">Browse</a>
                 </li>
                 <li class="nav-item"><a href="#hindi-recommendations" data-action="navigate-recommendations"
-                    data-section="hindi">Recommendations</a></li>
-                    <li class="nav-item"><a href="#footer" data-action="navigate-about">About</a></li>
-                </ul>
-            </nav>
-            <!-- <div class="hamburger" id="hamburger">
+                        data-section="hindi">Recommendations</a></li>
+                <li class="nav-item"><a href="#footer" data-action="navigate-about">About</a></li>
+            </ul>
+        </nav>
+        <!-- <div class="hamburger" id="hamburger">
                 <ul>
                     <li class="bar"><a href="#header"> <span>Home</span></a></li>
                     <li class="bar"><a href="#home-viewr">Browse</a></li>
@@ -32,11 +33,12 @@
                     <li class="bar"> <a href="#footer"> About</a></li>
                 </ul>
             </div> -->
-        </header>
-        
+    </header>
+
     <main class="container">
         <section id="home-view" class="view">
             <div class="hero-section" id="home-search-container">
+                <img src="" alt="background" id="background" style="filter: brightness(50%)" >
                 <h1>Find Your Next Cinematic Adventure.</h1>
                 <p>Explore millions of movie titles, personalized recommendations, and top-rated films.</p>
                 <div class="search-bar hero-search-bar" id="search-bar">
@@ -47,14 +49,16 @@
             <div id="Trending">
                 <h2 class="section-title" style="text-align: left; width: 75%;">Trending Now 🔥</h2>
                 <div id="trending-movies-container" class="movie-grid"></div>
+                <button id="show-more-trending" class="cta-button">Show More</button>
             </div>
             <div id="hindi-recommendations" style="margin-top: 40px; " class="hindi-recommendations">
                 <h2 class="section-title" style=" text-align: left; width: 75%;">Top Hindi Movies 🇮🇳</h2>
                 <div id="hindi-movies-container" class="movie-grid"></div>
+                <button id="show-more-hindi" class="cta-button">Show More</button>
             </div>
         </section>
 
-        <section id="search-results-view" class="view hidden">
+        <section id="search-results-view" class="view hidden" style="position:relative;">
             <h2 class="section-title">Results for: "<span id="search-query-display"></span>"</h2>
             <div class="search-bar-container">
                 <div class="search-bar hidden">
@@ -64,24 +68,23 @@
             </div>
             <div class="result-container">
                 <div style=" width: 75%; gap: 15px; margin-bottom: 20px;">
-                    <select
-                        style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
-                        <option>Sort By: Rating</option>
-                        <option>Sort By: Release Year</option>
-                        <option>Sort By: Title</option>
+                    <select id="sortSelect" style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
+                        <option value="rating">Sort By: Rating</option>
+                        <option value="release_year">Sort By: Release Year</option>
+                        <option value="title">Sort By: Title</option>
                     </select>
                     <button
                         style="background-color: var(--color-secondary); color: var(--color-text-light); border: 1px solid var(--color-text-fade); padding: 10px 15px; border-radius: 5px;">Filter:
                         All Genres</button>
                 </div>
-                <div id="search-results-container" class="movie-grid"></div>
-                <div class="pagination">
-                    <button>&laquo; Prev</button>
-                    <button class="active">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>Next &raquo;</button>
+                <div id="loading-indicator"
+                    class="absolute inset-0 flex flex-col items-center justify-center bg-black/70 z-10 hidden">
+
+                    <div class="loader-ring"></div>
+                    <h2 class="text-xl font-bold text-light mt-4">Loading...</h2>
                 </div>
+                <div id="search-results-container" class="movie-grid"></div>
+                
             </div>
         </section>
 

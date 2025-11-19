@@ -1,4 +1,4 @@
-const API_KEY = '';
+const API_KEY = '4cee57298fba0f4818ead0de0d96dbae';
 const getGenreMap = async function () {
   const res = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`);
   if (!res.ok) {
