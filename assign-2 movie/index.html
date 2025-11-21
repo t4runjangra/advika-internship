@@ -20,7 +20,7 @@
                         data-query="Browse">Browse</a>
                 </li>
                 <li class="nav-item"><a href="#hindi-recommendations" data-action="navigate-recommendations"
-                        data-section="hindi">Recommendations</a></li>
+                        data-section="hindi">Top Hindi</a></li>
                 <li class="nav-item"><a href="#footer" data-action="navigate-about">About</a></li>
             </ul>
         </nav>
@@ -34,32 +34,36 @@
                 </ul>
             </div> -->
     </header>
+    <div id="movie-modal" class="modal hidden">
+        <div class="modal-content"></div>
+    </div>
 
+    
     <main class="container">
         <section id="home-view" class="view">
             <div class="hero-section" id="home-search-container">
-                <img src="" alt="background" id="background" style="filter: brightness(50%)" >
+                <img src="" alt="background" id="background" style="filter: brightness(50%)">
                 <h1>Find Your Next Cinematic Adventure.</h1>
                 <p>Explore millions of movie titles, personalized recommendations, and top-rated films.</p>
                 <div class="search-bar hero-search-bar" id="search-bar">
-                    <input type="text" id="home-search-input" placeholder="Search for a movie, director, or genre...">
+                    <input type="text" id="home-search-input" placeholder="Which movie do you want to search?">
                     <button class="btn-search" id="search" data-context="home">Search</button>
                 </div>
             </div>
             <div id="Trending">
-                <h2 class="section-title" style="text-align: left; width: 75%;">Trending Now 🔥</h2>
+                <h2 class="section-title">Trending Now 🔥</h2>
                 <div id="trending-movies-container" class="movie-grid"></div>
                 <button id="show-more-trending" class="cta-button">Show More</button>
             </div>
             <div id="hindi-recommendations" style="margin-top: 40px; " class="hindi-recommendations">
-                <h2 class="section-title" style=" text-align: left; width: 75%;">Top Hindi Movies 🇮🇳</h2>
+                <h2 class="section-title">Top Hindi Movies 🇮🇳</h2>
                 <div id="hindi-movies-container" class="movie-grid"></div>
                 <button id="show-more-hindi" class="cta-button">Show More</button>
             </div>
         </section>
 
         <section id="search-results-view" class="view hidden" style="position:relative;">
-            <h2 class="section-title">Results for: "<span id="search-query-display"></span>"</h2>
+            <h2 class="section-title result-for" style="margin: auto;" >Results for: "<span id="search-query-display"></span>"</h2>
             <div class="search-bar-container">
                 <div class="search-bar hidden">
                     <input type="text" id="results-search-input" placeholder="Refine your search...">
@@ -68,7 +72,8 @@
             </div>
             <div class="result-container">
                 <div style=" width: 75%; gap: 15px; margin-bottom: 20px;">
-                    <select id="sortSelect" style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
+                    <select id="sortSelect"
+                        style="padding: 10px; border-radius: 5px; background-color: var(--color-card-bg); color: var(--color-text-light); border: 1px solid var(--color-text-fade);">
                         <option value="rating">Sort By: Rating</option>
                         <option value="release_year">Sort By: Release Year</option>
                         <option value="title">Sort By: Title</option>
@@ -84,7 +89,7 @@
                     <h2 class="text-xl font-bold text-light mt-4">Loading...</h2>
                 </div>
                 <div id="search-results-container" class="movie-grid"></div>
-                
+
             </div>
         </section>
 
