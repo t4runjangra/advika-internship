@@ -331,7 +331,7 @@ a:hover {
   padding: 2rem;
   border-radius: 1rem;
   width: 95vw;
-  height: 42rem;
+  height: 45rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   position: relative;
   display: flex;
@@ -695,6 +695,8 @@ a:hover {
   /* Optional drop shadow for depth */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
+
+
 
 @keyframes spin {
   0% {
