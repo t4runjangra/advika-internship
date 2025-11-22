@@ -39,6 +39,9 @@ a:hover {
 }
 
 .header {
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
   background-color: var(--color-secondary);
   padding: 15px 30px;
   display: flex;
@@ -67,6 +70,54 @@ a:hover {
   display: block;
   border-radius: 5px;
   transition: background-color 0.2s;
+}
+
+.hamburger {
+  display: none; /* hide by default on desktop */
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
+.mobile-menu {
+  display: none;
+  background: #222222f3;
+  position: fixed;
+  width: 100%;
+  top: 55px;
+  left: 0;
+  /* padding: 1rem 0; */
+  z-index: 1000;
+}
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: large;
+}
+.mobile-menu.visible {
+  display: block !important;
+}
+
+.mobile-menu ul li a:hover {
+  background: #ff0606;
+  color: var(--color-text-fade);
+  text-align: center;
+  transform: scale(1.2);
 }
 
 .nav-item a:hover {
@@ -274,11 +325,21 @@ a:hover {
   color: #fff;
   z-index: 10;
 }
-
+.modal-content {
+  background: #222222de;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 95vw;
+  height: 42rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+  position: relative;
+  display: flex;
+  gap: 2.5rem;
+}
 .modal-poster {
-  width: 220px;
-  min-width: 200px;
-  height: 320px;
+  width: 150px;
+  max-height: 200px;
   object-fit: cover;
   border-radius: 18px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -304,16 +365,21 @@ a:hover {
 .modal-details .modal-metadata {
   margin: 0.2em 0;
   color: #dcdcdc;
+  font-size: xx-small;
 }
 
 .modal-details .modal-metadata {
-  font-size: 1.05em;
+  font-size: 0.7em;
+  margin-top: -20px;
+  margin-bottom: -10px;
   display: flex;
   align-items: center;
   gap: 1em;
   color: #ffc300;
 }
-
+.budget-data {
+  font-size: x-small;
+}
 #background {
   border-radius: 50px;
   position: absolute;
@@ -549,31 +615,6 @@ a:hover {
 .hidden {
   display: none !important;
 }
-/*
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-  width: 20vw;
-  height: 10vw;
-  color: var(--color-text-light);
-  }
-  .hamburger ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    }
-    .hamburger li {
-      height: 70px;
-      width: 100%;
-      background-color: rgb(45, 44, 44);
-      border-radius: 2px; 
-  text-align: center;
-  padding: 10px;
-} */
 
 .nav-menu {
   display: flex;
@@ -620,7 +661,7 @@ a:hover {
 }
 
 .hamburger {
-  display: flex;
+  display: none;
 }
 
 .search-bar-container {
@@ -637,20 +678,22 @@ a:hover {
   width: 100%;
   padding-bottom: 56.25%;
   height: 0;
-  margin-top: 18px;   
+  margin-top: 18px;
   border-radius: 12px;
   overflow: hidden;
 }
 
 .modal-iframe-wrapper iframe {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border: none;
   border-radius: 12px;
   background: #111;
   /* Optional drop shadow for depth */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes spin {
@@ -665,20 +708,22 @@ a:hover {
 @media (max-width: 1024px) {
   .header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
+    /* /* flex-direction: column; */
   }
   .container {
     padding: 15px;
   }
 
-
   .nav-list {
-    display: flex;
+    display: none;
   }
 
-  .movie-poster{
+  .hamburger {
+    display: flex;
+  }
+  .movie-poster {
     height: 80%;
   }
 
@@ -690,8 +735,8 @@ a:hover {
     font-size: 1rem;
   }
 
-  #background{
-    margin:auto;
+  #background {
+    margin: auto;
   }
   .search-bar {
     width: 70%;
@@ -709,14 +754,18 @@ a:hover {
 
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-between;
     padding: 12px 16px;
-    height: 110px;
+    height: 55px;
+  }
+  .search-bar-container {
+    padding: 10px 0; /* less padding */
+    width: 100%; /* full width for container */
   }
 
   .nav-list {
-    display: flex;
+    display: none;
     width: 100%;
     font-size: smaller;
   }
@@ -724,7 +773,7 @@ a:hover {
     display: flex;
   }
 
-  .result-for{
+  .result-for {
     margin-left: none;
   }
   .nav-menu {
@@ -766,7 +815,7 @@ a:hover {
   }
 
   .hero-section {
-    height: 350px;
+    height: 400px;
     /* padding: 20px; */
   }
 
@@ -779,31 +828,28 @@ a:hover {
   }
 
   #background {
-    height: 35%;
-    top: 130px;
-    display: block;
-    margin: auto;
+    height: 42%;
+    margin-top: -32px;
   }
 
   .search-bar {
-    width: 85%;
-    height: 10%;
-    border-radius: 10px;
-
+    max-width: none; /* remove max-width so it doesn't restrict */
+    border-radius: 18px; /* less rounded corners */
+    height: 38px; /* make bar thinner */
   }
 
   .search-bar input {
-    font-size: 0.4rem;
-    padding: 10px 14px;
+    font-size: 1rem;
+    padding: 8px 12px;
   }
 
   .search-bar input[type="text"]::placeholder {
-    font-size: 0.85rem;
+    font-size: 0.5rem;
   }
   .search-bar button {
-    font-size: 0.9rem;
-    padding: 10px 14px;
-    min-width: 80px;
+    padding: 8px 18px; /* button also reduced */
+    font-size: 0.95rem; /* button text smaller */
+    min-width: 73px; /* keep touch size but avoid bulk */
   }
 
   .movie-grid {
@@ -844,7 +890,7 @@ a:hover {
   .detail-info h1 {
     font-size: 1.8rem;
   }
-  
+
   .detail-meta-group {
     justify-content: center;
   }
@@ -852,22 +898,36 @@ a:hover {
   .key-info {
     grid-template-columns: 1fr;
   }
-  
+
   .cta-button {
     width: 100%;
   }
-  .section-title{
+  .section-title {
     font-size: 1.5rem;
     margin-left: -83px;
+  }
+  .modal-poster {
+    width: 150px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 }
 
 @media (max-width: 480px) {
   .movie-grid {
-    /* grid-template-columns: repeat(2, 1fr); */
     gap: 12px;
   }
-
+  .nav-list {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .mobile-menu.visible {
+    display: block !important;
+  }
   .hero-section h1 {
     font-size: 1.3rem;
   }
@@ -883,18 +943,35 @@ a:hover {
     padding: 14px 18px;
   }
 
-    .search-bar {
-    width: 100%;
-    height: 35px;
-    border-radius: 10px;
-
+  #background {
+    border-radius: 0;
   }
-  .section-title{
+  .search-bar {
+    width: 80%;
+    border-radius: 10px;
+    height: 30px;
+  }
+
+  .search-bar input[type="text"] {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+  }
+  .search-bar input[type="text"]::placeholder {
+    font-size: xx-small;
+  }
+  .search-bar button {
+    padding: 6px 12px;
+    font-size: 0.88rem;
+    min-width: 48px;
+  }
+  .section-title {
     font-size: 1.5rem;
     margin-left: -50px;
   }
-    .movie-poster{
+  .movie-poster {
     height: 62%;
   }
-
+  .logo {
+    font-size: 1.4rem;
+  }
 }

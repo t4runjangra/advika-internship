@@ -5,39 +5,53 @@ import { searchMovie } from "./search-movie.js";
 import { fetchAndShowMovieModal } from "./show-movie.js";
 import { showMovieModal } from "./movie-modal.js";
 document.addEventListener('DOMContentLoaded', () => {
-  
-  
+
+
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  hamburger.addEventListener("click", () => {
+    mobileMenu.classList.toggle("visible");
+    hamburger.classList.toggle("active");
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('visible');
+      hamburger.classList.remove('active');
+    });
+  });
+
   const trendingMoviesContainer = document.getElementById('trending-movies-container');
   const hindiMoviesContainer = document.querySelector("#hindi-movies-container");
   const searchResultsContainer = document.getElementById('search-results-container');
-  
-  
+
+
   const API_KEY = '4cee57298fba0f4818ead0de0d96dbae';
   const image = document.getElementById('background')
-  
+
   trendingMoviesContainer.addEventListener('click', async function (event) {
     const card = event.target.closest('.movie-card');
     if (!card) return;
     const movieId = card.getAttribute('data-movie-id');
-    await fetchAndShowMovieModal(movieId); 
+    await fetchAndShowMovieModal(movieId);
   });
   hindiMoviesContainer.addEventListener('click', async function (event) {
     const card = event.target.closest('.movie-card');
     if (!card) return;
     const movieId = card.getAttribute('data-movie-id');
-    await fetchAndShowMovieModal(movieId); 
+    await fetchAndShowMovieModal(movieId);
   });
   searchResultsContainer.addEventListener('click', async function (event) {
     const card = event.target.closest('.movie-card');
     if (!card) return;
     const movieId = card.getAttribute('data-movie-id');
-    await fetchAndShowMovieModal(movieId); 
+    await fetchAndShowMovieModal(movieId);
   });
 
 
 
-  
- 
+
+
   document.getElementById('movie-modal').addEventListener('click', function (event) {
     if (
       event.target.classList.contains('modal') ||
@@ -46,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
       this.classList.add('hidden');
     }
   });
-  
-  
-  
+
+
+
   let backgroundMoviePostures = []
-  
+
   const MOVIES_PER_PAGE = 10;
   let trendingMoviesData = [];
   let currentShowCount = MOVIES_PER_PAGE;
@@ -59,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`);
       const genreMap = await getGenreMap();
       if (!response.ok) throw new Error(showErrorToast('Network error while fetching Movies'));
-      
+
       const data = await response.json();
       backgroundMoviePostures = data.results
       trendingMoviesData = data.results;
@@ -73,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showErrorToast("Failed to fetch movie data. Please try again.")
     }
   }
-  
+
   const showMoreBtn = document.getElementById('show-more-trending')
   function addShowMoreButton(genreMap) {
     showMoreBtn.addEventListener('click', () => {
@@ -83,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
       showMoreBtn.style.display = 'none';
     });
   }
-  
-  
+
+
   fetchTrendingMovies();
 
   let hindiMoviesData = [];
@@ -98,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       hindiMoviesData = data.results
       hindiCurrentShowCount = MOVIES_PER_PAGE
-      
+
       renderMovies(hindiMoviesContainer, hindiMoviesData.slice(0, hindiCurrentShowCount), genreMap);
       addShowMoreHindiButton(genreMap)
     } catch (error) {
@@ -106,9 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(error);
     }
   }
-  
+
   const showMoreHindiBtn = document.getElementById('show-more-hindi');
-  
+
   function addShowMoreHindiButton(genreMap) {
     showMoreHindiBtn.addEventListener('click', () => {
       hindiCurrentShowCount = hindiMoviesData.length;
@@ -116,23 +130,23 @@ document.addEventListener('DOMContentLoaded', () => {
       showMoreHindiBtn.style.display = 'none';
     });
   }
-  
-  
+
+
   fetchHindiMovies();
-  
+
   // const hamburger = document.getElementById('hamburger');
   // const navMenu = document.getElementByclass('nav-menu');
   // const navList = document.getElementByclass('nav-list')
-  
+
   // hamburger.addEventListener('click', () => {
   //     navList.classList.add('hidden')
   //     navMenu.classList.toggle('active');
   //     hamburger.classList.toggle('active');
   // });
-  
-  
+
+
   const searchInput = document.getElementById('home-search-input');
-  
+
   const searchBar = document.getElementsByClassName('search-bar');
   const resultsSearchInput = document.getElementById('results-search-input');
   const trendingSection = document.getElementById('Trending');
@@ -141,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchQueryDisplay = document.getElementById('search-query-display');
   const loadingIndicator = document.getElementById('loading-indicator');
   const searchResultContainer = document.getElementById('search-results-view');
-  
-  
+
+
   const searchInputs = {
     home: document.getElementById('home-search-input'),
     results: document.getElementById('results-search-input')
