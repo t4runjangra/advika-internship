@@ -262,6 +262,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
-  
+  // Setup autocomplete suggestion box for search input
+  setupSuggestionBox('home-search-input', 'search-suggestions', API_KEY,
+    (movieTitle) => {
+      // When a suggestion is clicked, trigger the search
+      document.getElementById('search').click();
+    }
+  );
 
 });

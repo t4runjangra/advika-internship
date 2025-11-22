@@ -33,7 +33,7 @@
     <div class="mobile-menu " id="mobile-menu">
         <ul>
             <li><a href="" target="_self">Home</a></li>
-            <li><a href="#home-view"  data-action="navigate-browse" data-query="Browse">Browse</a></li>
+            <li><a href="#home-view" data-action="navigate-browse" data-query="Browse">Browse</a></li>
             <li><a href="#Trending">Trending</a></li>
             <li><a href="#hindi-recommendations">Hindi</a></li>
             <li><a href="#footer">About</a></li>
@@ -53,7 +53,9 @@
                 <p>Explore millions of movie titles, personalized recommendations, and top-rated films.</p>
                 <div class="search-bar hero-search-bar" id="search-bar">
                     <input type="text" id="home-search-input" placeholder="Which movie do you want to search?">
+                    <div id="search-suggestions" class="suggestion-box"></div>
                     <button class="btn-search" id="search" data-context="home">Search</button>
+
                 </div>
             </div>
             <div id="Trending">
@@ -69,8 +71,8 @@
         </section>
 
         <section id="search-results-view" class="view hidden" style="position:relative;">
-            <h2 class="section-title result-for" style="margin-top: 100px; margin-left: auto;margin-right: auto;">Results for: "<span
-                    id="search-query-display"></span>"</h2>
+            <h2 class="section-title result-for" style="margin-top: 100px; margin-left: auto;margin-right: auto;">
+                Results for: "<span id="search-query-display"></span>"</h2>
             <div class="search-bar-container">
                 <div class="search-bar hidden">
                     <input type="text" id="results-search-input" placeholder="Refine your search...">
