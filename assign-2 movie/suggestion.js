@@ -1,13 +1,3 @@
-// suggestion.js
-// Usage: import and call setupSuggestionBox in your main file after DOMContentLoaded
-
-/*
- * Attach autocomplete movie title suggestions to any search input.
- * @param {string} inputId         - id of input to attach to
- * @param {string} suggestBoxId    - id of empty dropdown container
- * @param {string} apiKey          - TMDb API Key
- * @param {function} onSelect      - function called when suggestion clicked (gets title)
- */
 export function setupSuggestionBox(inputId, suggestBoxId, apiKey, onSelect) {
   const input = document.getElementById(inputId);
   const suggestBox = document.getElementById(suggestBoxId);
@@ -15,7 +5,6 @@ export function setupSuggestionBox(inputId, suggestBoxId, apiKey, onSelect) {
 
   if (!input || !suggestBox) return;
 
-  // Listen for user typing
   input.addEventListener('input', async function () {
     const query = input.value.trim();
     if (!query) {
@@ -46,7 +35,6 @@ export function setupSuggestionBox(inputId, suggestBoxId, apiKey, onSelect) {
     }
   });
 
-  // Select suggestion
   suggestBox.addEventListener('click', e => {
     const item = e.target.closest('.suggestion-item');
     if (item) {
@@ -59,7 +47,6 @@ export function setupSuggestionBox(inputId, suggestBoxId, apiKey, onSelect) {
     }
   });
 
-  // Hide on blur (delay so click can complete)
   input.addEventListener('blur', () => {
     setTimeout(() => {
       suggestBox.innerHTML = '';

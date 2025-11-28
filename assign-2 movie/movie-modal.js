@@ -10,7 +10,6 @@ export function showMovieModal(movie) {
     ? movie.videos.results.find(vid => vid.type === 'Trailer' && vid.site === 'YouTube')
     : null;
 
-  // Always inject the trailer button and container
   const trailerBtn = `
     <button class="trailer-btn" data-video-key="${trailer ? trailer.key : ''}"
       style="display:inline-block;margin-bottom:1em;background:#e50914;color:#fff;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;">
@@ -47,13 +46,11 @@ export function showMovieModal(movie) {
   `;
   modal.classList.remove('hidden');
 
-  // Trailer button logic
   const trailerButton = modal.querySelector('.trailer-btn');
   if (trailerButton) {
     trailerButton.addEventListener('click', function () {
       const key = trailerButton.getAttribute('data-video-key');
       const videoContainer = modal.querySelector('#modal-trailer-container');
-      // Inject responsive iframe with a wrapper class (for proper aspect ratio)
       videoContainer.innerHTML = `
         <div class="modal-iframe-wrapper">
           <iframe src="https://www.youtube.com/embed/${key}?autoplay=1"
@@ -67,16 +64,14 @@ export function showMovieModal(movie) {
   }
 }
 
-// --- Modal close handler: always remove the trailer iframe on close ---
 
 document.getElementById('movie-modal').addEventListener('click', function (event) {
-  // Close if clicking the backdrop or the close × button
+
   if (
     event.target.classList.contains('modal') ||
     event.target.classList.contains('modal-close')
   ) {
     this.classList.add('hidden');
-    // Stop trailer if playing by destroying the iframe
     const videoContainer = document.getElementById('modal-trailer-container');
     if (videoContainer) videoContainer.innerHTML = '';
   }

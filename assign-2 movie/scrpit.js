@@ -4,6 +4,7 @@ import { renderMovies } from "./render-movie.js";
 import { searchMovie } from "./search-movie.js";
 import { fetchAndShowMovieModal } from "./show-movie.js";
 import { showMovieModal } from "./movie-modal.js";
+// import { setupSuggestionBox } from "./suggestion.js";
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -262,12 +263,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
-  // Setup autocomplete suggestion box for search input
-  setupSuggestionBox('home-search-input', 'search-suggestions', API_KEY,
-    (movieTitle) => {
-      // When a suggestion is clicked, trigger the search
-      document.getElementById('search').click();
+const suggestInput = document.getElementById('home-search-input');
+const suggestBox = document.getElementById('search-suggestions');
+let abortController = null;
+
+suggestInput.addEventListener('input', async function () {
+  const query = this.value.trim();
+
+  // Hide suggestions if input is empty
+  if (!query) {
+    suggestBox.innerHTML = '';
+    suggestBox.style.display = 'none';
+    return;
+  }
+
+  // Abort any ongoing fetch request to avoid race conditions
+  if (abortController) abortController.abort();
+  abortController = new AbortController();
+
+  try {
+    // Fetch movie suggestions from TMDb API
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=1`, { signal: abortController.signal });
+    if (!res.ok) throw new Error("Suggest fetch failed");
+
+    const data = await res.json();
+
+    // Show up to 6 suggestions
+    const results = data.results.slice(0, 6);
+
+    // Build HTML for suggestion items
+    suggestBox.innerHTML = results.map(movie =>
+      `<div class="suggestion-item" data-movie-title="${movie.title}">
+          ${movie.title} ${movie.release_date ? `(${movie.release_date.slice(0,4)})` : ''}
+       </div>`
+    ).join('');
+
+    // Display the suggestion box only if there are results
+    suggestBox.style.display = results.length ? 'block' : 'none';
+  } catch (e) {
+    if (e.name !== 'AbortError') {
+      suggestBox.innerHTML = '';
+      suggestBox.style.display = 'none';
     }
-  );
+  }
+});
+
+// When a suggestion is clicked: fill input and trigger a search
+suggestBox.addEventListener('click', function (e) {
+  const item = e.target.closest('.suggestion-item');
+  if (item) {
+    suggestInput.value = item.dataset.movieTitle;
+    suggestBox.innerHTML = '';
+    suggestBox.style.display = 'none';
+
+    // You can trigger your search button here if needed
+    document.getElementById('search').click();
+  }
+});
+
+// Hide suggestions when the input loses focus (with a small delay)
+suggestInput.addEventListener('blur', function () {
+  setTimeout(() => {
+    suggestBox.innerHTML = '';
+    suggestBox.style.display = 'none';
+  }, 130);
+});
 
 });

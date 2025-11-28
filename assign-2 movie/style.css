@@ -93,9 +93,10 @@ a:hover {
   width: 100%;
   top: 55px;
   left: 0;
- 
+
   z-index: 1000;
 }
+
 .mobile-menu ul {
   list-style: none;
   padding: 0;
@@ -109,6 +110,7 @@ a:hover {
   text-align: center;
   font-size: large;
 }
+
 .mobile-menu.visible {
   display: block !important;
 }
@@ -146,6 +148,7 @@ a:hover {
   padding: 20px 0;
   width: 100%;
 }
+
 .result-container {
   display: flex;
   justify-content: center;
@@ -153,13 +156,16 @@ a:hover {
   align-items: center;
   width: 100%;
 }
+
 .search-bar {
-  position: relative; /* Required for absolute positioning of suggestion box */
+  position: relative;
+  /* Required for absolute positioning of suggestion box */
   width: 50%;
   max-width: 600px;
   display: flex;
   border-radius: 50px;
-  overflow: visible; /* Changed from hidden to allow dropdown to show */
+  overflow: visible;
+  /* Changed from hidden to allow dropdown to show */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -191,11 +197,60 @@ a:hover {
 .search-bar button:hover {
   background-color: #ff3344;
 }
+
+/* Suggestion Box (dropdown below input) */
+.suggestion-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #181c20;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #353535;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  padding: 3px 0;
+  font-size: 1rem;
+  color: #f5f5f5;
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.suggestion-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: #e50914;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .suggestion-box {
+    font-size: 0.9rem;
+    max-height: 250px;
+  }
+
+  .suggestion-item {
+    padding: 10px 15px;
+  }
+}
+
 .view {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .movie-grid {
   width: 75%;
   display: grid;
@@ -260,6 +315,7 @@ a:hover {
 .star-icon {
   color: var(--color-star);
 }
+
 #Trending {
   width: 100%;
   display: flex;
@@ -268,6 +324,7 @@ a:hover {
   flex-direction: column;
   margin-top: 5pc;
 }
+
 .hindi-recommendations {
   width: 100%;
   display: flex;
@@ -275,6 +332,7 @@ a:hover {
   align-items: center;
   flex-direction: column;
 }
+
 .hero-section {
   height: 100vh;
   display: flex;
@@ -286,6 +344,7 @@ a:hover {
   margin-bottom: 20px;
   transition: background-image 0.7s ease-in-out;
 }
+
 .modal {
   position: fixed;
   left: 0;
@@ -327,6 +386,7 @@ a:hover {
   color: #fff;
   z-index: 10;
 }
+
 .modal-content {
   background: #222222de;
   color: #fff;
@@ -339,6 +399,7 @@ a:hover {
   display: flex;
   gap: 2.5rem;
 }
+
 .modal-poster {
   width: 150px;
   max-height: 200px;
@@ -373,18 +434,19 @@ a:hover {
 /* Suggestion Box (dropdown below input) */
 .suggestion-box {
   position: absolute;
-  top: 110%;      /* positions below the input field */
+  top: 110%;
+  /* positions below the input field */
   left: 0;
   width: 100%;
   background: #181c20;
   border-radius: 0 0 8px 8px;
   border: 1px solid #353535;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.19);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.19);
   z-index: 100;
   padding: 3px 0;
   font-size: 1rem;
   color: #f5f5f5;
-  display: none;  
+  display: none;
   max-height: 250px;
   overflow-y: auto;
 }
@@ -417,6 +479,7 @@ a:hover {
     width: 99%;
     min-width: 160px;
   }
+
   .suggestion-item {
     padding: 10px 9px;
   }
@@ -431,9 +494,11 @@ a:hover {
   gap: 1em;
   color: #ffc300;
 }
+
 .budget-data {
   font-size: small;
 }
+
 #background {
   border-radius: 50px;
   position: absolute;
@@ -463,6 +528,7 @@ a:hover {
   margin-bottom: 30px;
   color: var(--color-text-fade);
 }
+
 .hero-search-bar {
   width: 10vw;
   max-width: 800px;
@@ -626,6 +692,7 @@ a:hover {
   pointer-events: auto;
   transform: translateY(0);
 }
+
 .site-footer {
   background-color: var(--color-secondary);
   color: var(--color-text-fade);
@@ -701,6 +768,7 @@ a:hover {
   align-items: center;
   flex-direction: column;
 }
+
 .loader-ring {
   width: 80px;
   height: 80px;
@@ -710,6 +778,7 @@ a:hover {
   border-left-color: #474747;
   animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
+
 .text-light {
   color: #f3f4f6;
 }
@@ -721,6 +790,7 @@ a:hover {
 .search-bar-container {
   justify-content: center;
 }
+
 .search-bar {
   display: flex !important;
   width: 50%;
@@ -746,7 +816,7 @@ a:hover {
   border: none;
   border-radius: 12px;
   background: #111;
- 
+
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -754,6 +824,7 @@ a:hover {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -764,8 +835,9 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
+
   }
+
   .container {
     padding: 15px;
   }
@@ -777,10 +849,11 @@ a:hover {
   .hamburger {
     display: flex;
   }
+
   .movie-poster {
     height: 80%;
   }
-  
+
   .hero-section h1 {
     font-size: 2.5rem;
   }
@@ -792,6 +865,7 @@ a:hover {
   #background {
     margin: auto;
   }
+
   .search-bar {
     width: 70%;
   }
@@ -800,7 +874,7 @@ a:hover {
     gap: 25px;
     padding: 25px;
   }
-  
+
   .detail-info h1 {
     font-size: 2.4rem;
   }
@@ -808,47 +882,52 @@ a:hover {
 
 @media (max-width: 768px) {
   .header {
-   
+
     justify-content: space-between;
     padding: 12px 16px;
     height: 55px;
   }
+
   .search-bar-container {
     padding: 10px 0;
     width: 100%;
   }
 
   #Trending {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: -50px;
-}
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -50px;
+  }
+
   .modal-details p {
     margin: 0.2em 0;
     color: #dcdcdc;
     font-size: 0.75rem;
   }
+
   .modal-details .modal-metadata {
-  font-size: 1em;
-  margin-top: -20px;
-  margin-bottom: -10px;
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  color: #ffc300;
-}
+    font-size: 1em;
+    margin-top: -20px;
+    margin-bottom: -10px;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    color: #ffc300;
+  }
 
   .budget-data {
-  font-size: xx-small;
-}
+    font-size: xx-small;
+  }
+
   .nav-list {
     display: none;
     width: 100%;
     font-size: smaller;
   }
+
   .hamburger {
     display: flex;
   }
@@ -856,6 +935,7 @@ a:hover {
   .result-for {
     margin-left: none;
   }
+
   .nav-menu {
     display: none;
     flex-direction: column;
@@ -884,19 +964,22 @@ a:hover {
   .hamburger.active .bar-top {
     transform: rotate(45deg) translate(5px, 5px);
   }
+
   .hamburger.active .bar-mid {
     opacity: 0;
   }
+
   .hamburger.active .bar-bottom {
     transform: rotate(-45deg) translate(5px, -5px);
   }
+
   .nav-item a {
     padding: 10px 15px;
   }
 
   .hero-section {
     height: 400px;
-   
+
   }
 
   .hero-section h1 {
@@ -927,6 +1010,7 @@ a:hover {
   .search-bar input[type="text"]::placeholder {
     font-size: 0.75rem;
   }
+
   .search-bar button {
     padding: 8px 18px;
     font-size: 0.95rem;
@@ -942,15 +1026,15 @@ a:hover {
   .movie-card {
     border-radius: 8px;
   }
-  
+
   .modal-content {
-   
+
     padding: 1.2rem;
     gap: 1rem;
     width: 95vw;
     min-height: auto;
   }
-  
+
   .modal-details h2 {
     font-size: 1.3rem;
   }
@@ -967,7 +1051,7 @@ a:hover {
     height: 300px;
     min-width: 0;
   }
-  
+
   .detail-info h1 {
     font-size: 1.8rem;
   }
@@ -975,7 +1059,7 @@ a:hover {
   .detail-meta-group {
     justify-content: center;
   }
-  
+
   .key-info {
     grid-template-columns: 1fr;
   }
@@ -983,10 +1067,12 @@ a:hover {
   .cta-button {
     width: 100%;
   }
+
   .section-title {
     font-size: 1.5rem;
     margin-left: -83px;
   }
+
   .modal-poster {
     width: 150px;
     height: 320px;
@@ -1000,22 +1086,27 @@ a:hover {
   .movie-grid {
     gap: 12px;
   }
+
   .nav-list {
     display: none;
   }
+
   .hamburger {
     display: flex;
   }
+
   .mobile-menu.visible {
     display: block !important;
   }
+
   .hero-section h1 {
     font-size: 1.3rem;
   }
-  
+
   .hero-section p {
     font-size: 0.7rem;
   }
+
   .modal-content {
     flex-direction: column;
     padding: 1.2rem;
@@ -1023,7 +1114,7 @@ a:hover {
     width: 95vw;
     min-height: auto;
   }
-  
+
   .modal-details .modal-metadata {
     font-size: 0.76rem;
     margin-top: -20px;
@@ -1033,6 +1124,7 @@ a:hover {
     gap: 1em;
     color: #ffc300;
   }
+
   .toast {
     width: 90%;
     right: 5%;
@@ -1043,6 +1135,7 @@ a:hover {
   #background {
     border-radius: 0;
   }
+
   .search-bar {
     width: 80%;
     border-radius: 10px;
@@ -1053,21 +1146,26 @@ a:hover {
     padding: 4px 8px;
     font-size: 0.85rem;
   }
+
   .search-bar input[type="text"]::placeholder {
     font-size: xx-small;
   }
+
   .search-bar button {
     padding: 6px 12px;
     font-size: 0.88rem;
     min-width: 48px;
   }
+
   .section-title {
     font-size: 1.5rem;
     margin-left: -50px;
   }
+
   .movie-poster {
     height: 62%;
   }
+
   .logo {
     font-size: 1.4rem;
   }
